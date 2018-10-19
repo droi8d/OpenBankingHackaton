@@ -16,5 +16,10 @@ namespace OpenBankingApi.Controllers
             var model = new AuthorizedSites();
             return View(model);
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }
