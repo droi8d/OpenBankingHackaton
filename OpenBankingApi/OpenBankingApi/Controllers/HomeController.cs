@@ -45,7 +45,7 @@ namespace OpenBankingApi.Controllers
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
             var aa = new AuthorizationHandler();
-            await aa.SendRequest();
+            await aa.SendRequest(); 
 
             return tokenString;
         }
