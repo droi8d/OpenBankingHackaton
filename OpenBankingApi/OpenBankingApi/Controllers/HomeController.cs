@@ -49,22 +49,31 @@ namespace OpenBankingApi.Controllers
                 { "sub", "team6@bankmillennium.pl" },
                 { "response_code", "Code" },
                 { "redirect_uri", "http://localhost:55647/UserLogged" },
+
+                //AIS Scope
                 { "scope", "[{\"resource\":{\"type\":\"account\",\"accountType\":{\"paymentAccount\":[],\"creditCardAccount\":[]}},\"scopeTimeDuration\":600,\"throttlingPolicy\":\"psd2Regulatory\",\"privilegeList\":{\"ais:accounts\":{\"maxAllowedHistoryLong\":365}},\"scopeGroupType\":\"accountInformationService\"}]" },
+
+                //PIS scope
+                //{ "scope", "[{\"resource\":{\"type\":\"account\",\"accountType\":{\"paymentAccount\":[],"+"\"creditCardAccount\":[]}},\"scopeTimeDuration\":600,\"throttlingPolicy\":\"psd2Regulatory\",\"privilegeList\":"+
+                //"{\"pis:domestic\":{\"scopeUsageLimit\":1}},\"scopeGroupType\":\"paymentInformationService\"}]" },
                 { "state", "22137C25EE4A3BB48AF76FA7938EB6C340C668DC6204CE5B27BA7BE8433C6F8C" }
             };
 
-            var path = @"C:\Certyficates\bank.millennium.psd2.sandbox.signing.hackathon.team.06.pfx";
+            var path = @"C:\Certificates\bank.millennium.psd2.sandbox.signing.hackathon.team.06.pfx";
             var cert = ReadFile(path);
             _certificate.Import(cert, "millennium", X509KeyStorageFlags.DefaultKeySet);
             string tokenSigned = JWT.Encode(payload, _certificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
 
-            var client = new HttpClient();
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            httpClientHandler.AllowAutoRedirect = false;
+            var client = new HttpClient(/*httpClientHandler*/);
+
             var result = await client.PostAsync("https://bm-devportal-testwebapp03.azurewebsites.net/authorization", new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("jwt", tokenSigned)
             }));
 
-            return Redirect(result.RequestMessage.RequestUri.ToString());
+            return Redirect(result.RequestMessage.RequestUri.ToString()+"&redirect=true");
         }
     }
 }
