@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using Jose;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace OpenBankingApi.Controllers
 {
@@ -29,6 +30,17 @@ namespace OpenBankingApi.Controllers
             return View();
         }
 
+        private static byte[] ReadFile(string fileName)
+        {
+            FileStream f = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            int size = (int)f.Length;
+            byte[] data = new byte[size];
+            size = f.Read(data, 0, size);
+            f.Close();
+            return data;
+        }
+
+
         [HttpPost]
         public async Task<string> Token()
         {
@@ -42,7 +54,7 @@ namespace OpenBankingApi.Controllers
             };
 
             var path = "D:/cert/bank.millennium.psd2.sandbox.signing.hackathon.team.06.pfx";
-            var cert = RequestSigningHandler.ReadFile(path);
+            var cert = ReadFile(path);
             _certificate.Import(cert, "millennium", X509KeyStorageFlags.DefaultKeySet);
             string tokenSigned = JWT.Encode(payload, _certificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
 
