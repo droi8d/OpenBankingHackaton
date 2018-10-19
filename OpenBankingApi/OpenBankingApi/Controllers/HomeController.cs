@@ -31,6 +31,7 @@ namespace OpenBankingApi.Controllers
             return View();
         }
 
+
         [HttpPost]
         public async Task<string> Token()
         {
@@ -49,6 +50,7 @@ namespace OpenBankingApi.Controllers
 
             return tokenString;
         }
+
 
     }
 }
