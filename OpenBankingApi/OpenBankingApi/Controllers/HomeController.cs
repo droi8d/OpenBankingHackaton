@@ -53,7 +53,7 @@ namespace OpenBankingApi.Controllers
                 { "state", "22137C25EE4A3BB48AF76FA7938EB6C340C668DC6204CE5B27BA7BE8433C6F8C" }
             };
 
-            var path = "D:/cert/bank.millennium.psd2.sandbox.signing.hackathon.team.06.pfx";
+            var path = @"C:\Certyficates\bank.millennium.psd2.sandbox.signing.hackathon.team.06.pfx";
             var cert = ReadFile(path);
             _certificate.Import(cert, "millennium", X509KeyStorageFlags.DefaultKeySet);
             string tokenSigned = JWT.Encode(payload, _certificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
