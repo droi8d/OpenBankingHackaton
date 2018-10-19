@@ -19,16 +19,14 @@ namespace OpenBankingApi.Handlers
                 sub = "TPP.NEWINT",
                 response_code = "Code",
                 redirect_uri = "http://localhost",
-                scope =
-                "[{\"privilegeList\":{\"pis:domestic\":{\"scopeUsageLimit\":1,\"recipientAccountNumber\":\"25116022020000000168811491\",\"recipientName\":\"iohoihoi\",\"recipientAddress\":[\"hiohoiho\"],\"amount\":10.0,\"transferTitle\":\"hiohiohio\",\"system\":\"Elixir\",\"deliveryMode\":\"ExpressD0\",\"currency\":\"PLN\"},\"pis:getPayment\":{\"scopeUsageLimit\":20}},\"scopeGroupType\":\"paymentInformationService\",\"resource\":{\"accountType\":{\"creditCardAccount\":[],\"paymentAccount\":[]},\"type\":\"account\"},\"scopeTimeDuration\":14400,\"throttlingPolicy\":\"psd2Regulatory\"}]",
+                scope = "[{\"resource\":{\"type\":\"account\",\"accountType\":{\"paymentAccount\":[],\"creditCardAccount\":[]}},\"scopeTimeDuration\":600,\"throttlingPolicy\":\"psd2Regulatory\",\"privilegeList\":{\"ais:accounts\":{\"maxAllowedHistoryLong\":365}},\"scopeGroupType\":\"accountInformationService\"}]",
                 state = "71BDF70E61AC2BB1853E857DAD65B7D926ECDCB4FC80C58F7A747963E727E5A9"
             };
 
             var json = JsonConvert.SerializeObject(a);
             var content = new System.Net.Http.StringContent(json, Encoding.UTF8, "application/json");
-            var request = new HttpRequestMessage
+            var request = new HttpRequestMessage(method: HttpMethod.Post, requestUri: new Uri("https://bm-devportal-testwebapp03.azurewebsites.net/authorization"))
             {
-                RequestUri = new Uri("https://bm-devportal-testwebapp03.azurewebsites.net/authorization"),
                 Content = content
             };
 
