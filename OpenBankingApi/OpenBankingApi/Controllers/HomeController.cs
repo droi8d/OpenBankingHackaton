@@ -1,7 +1,8 @@
 ﻿using OpenBankingApi.Handlers;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Claims;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
