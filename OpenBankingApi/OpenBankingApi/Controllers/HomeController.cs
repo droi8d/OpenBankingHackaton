@@ -8,9 +8,12 @@ using System.IO;
 
 namespace OpenBankingApi.Controllers
 {
+    using OpenBankingApi.Models;
+
     public class HomeController : Controller
     {
         private readonly X509Certificate2 _certificate = new X509Certificate2();
+
         public ActionResult Index()
         {
             return View();
@@ -40,18 +43,18 @@ namespace OpenBankingApi.Controllers
             return data;
         }
 
-
         [HttpGet]
         public async Task<ActionResult> Token()
         {
+            var scope = new AISScope(true, false, false, false, false, false);
             var payload = new Dictionary<string, string>()
             {
                 { "sub", "team6@bankmillennium.pl" },
                 { "response_code", "Code" },
                 { "redirect_uri", "http://localhost:55647/UserLogged" },
-
                 //AIS Scope
-                { "scope", "[{\"resource\":{\"type\":\"account\",\"accountType\":{\"paymentAccount\":[],\"creditCardAccount\":[]}},\"scopeTimeDuration\":600,\"throttlingPolicy\":\"psd2Regulatory\",\"privilegeList\":{\"ais:accounts\":{\"maxAllowedHistoryLong\":365}},\"scopeGroupType\":\"accountInformationService\"}]" },
+                { "scope", scope.GetAISScope(new List<string>(), new List<string>())},
+                
 
                 //PIS scope
                 //{ "scope", "[{\"resource\":{\"type\":\"account\",\"accountType\":{\"paymentAccount\":[],"+"\"creditCardAccount\":[]}},\"scopeTimeDuration\":600,\"throttlingPolicy\":\"psd2Regulatory\",\"privilegeList\":"+

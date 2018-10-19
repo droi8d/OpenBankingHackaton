@@ -253,15 +253,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Scope\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AIS\AISRequestHeader.cs" />
     <Compile Include="Models\AIS\GetUserAllAccountsInformation.cs" />
+    <Compile Include="Models\Scope\AISScope.cs" />
+    <Compile Include="Models\Scope\AllowedHistoryLong.cs" />
     <Compile Include="Models\AuthorizedSite.cs" />
     <Compile Include="Models\AuthorizedSites.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Redirect.cs" />
     <Compile Include="Models\TokenModel.cs" />
+    <Compile Include="Models\Scope\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
