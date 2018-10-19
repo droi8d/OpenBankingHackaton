@@ -41,14 +41,14 @@ namespace OpenBankingApi.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<string> Token()
+        [HttpGet]
+        public async Task<ActionResult> Token()
         {
             var payload = new Dictionary<string, string>()
             {
                 { "sub", "team6@bankmillennium.pl" },
                 { "response_code", "Code" },
-                { "redirect_uri", "http://localhost" },
+                { "redirect_uri", "http://localhost:55647/UserLogged" },
                 { "scope", "[{\"resource\":{\"type\":\"account\",\"accountType\":{\"paymentAccount\":[],\"creditCardAccount\":[]}},\"scopeTimeDuration\":600,\"throttlingPolicy\":\"psd2Regulatory\",\"privilegeList\":{\"ais:accounts\":{\"maxAllowedHistoryLong\":365}},\"scopeGroupType\":\"accountInformationService\"}]" },
                 { "state", "22137C25EE4A3BB48AF76FA7938EB6C340C668DC6204CE5B27BA7BE8433C6F8C" }
             };
@@ -64,7 +64,7 @@ namespace OpenBankingApi.Controllers
                 new KeyValuePair<string, string>("jwt", tokenSigned)
             }));
 
-            return await result.Content.ReadAsStringAsync();
+            return Redirect(result.RequestMessage.RequestUri.ToString());
         }
     }
 }
