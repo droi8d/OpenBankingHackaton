@@ -18,7 +18,7 @@ namespace OpenBankingApi.Handlers
 
         public RequestSigningHandler() { }
 
-        internal static byte[] ReadFile(string fileName)
+        public static byte[] ReadFile(string fileName)
         {
             FileStream f = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             int size = (int)f.Length;
@@ -42,12 +42,13 @@ namespace OpenBankingApi.Handlers
             var cert = ReadFile(path);
             _certificate.Import(cert, "millennium", X509KeyStorageFlags.DefaultKeySet);
 
-            var contentJws = JWT.EncodeBytes(content, _certificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
+            var contentJws = JWT.Encode(content, _certificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
             var startIndex = contentJws.IndexOf('.') + 1;
             var jwsSignature = contentJws.Remove(startIndex, contentJws.IndexOf('.', startIndex) - startIndex);
 
             request.Headers.Remove("X-JWS-SIGNATURE");
             request.Headers.TryAddWithoutValidation("X-JWS-SIGNATURE", jwsSignature);
+            request.Method = HttpMethod.Post;
 
             var postResult = new HttpResponseMessage();
             try
