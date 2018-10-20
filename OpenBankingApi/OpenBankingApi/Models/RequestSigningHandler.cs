@@ -30,7 +30,7 @@ namespace OpenBankingApi.Models
             var jwsSignature = contentJws.Remove(startIndex, contentJws.IndexOf('.', startIndex) - startIndex);
 
             request.Headers.Remove("X-JWS-SIGNATURE");
-            request.Headers.TryAddWithoutValidation("X-JWS-SIGNATURE", jwsSignature);
+            request.Headers.TryAddWithoutValidation("X-JWS-SIGNATURE", "TURNOFFSIGNATUREVALIDATION");// jwsSignature);
 
             return await base.SendAsync(request, cancellationToken);
         }

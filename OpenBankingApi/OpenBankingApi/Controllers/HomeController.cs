@@ -46,7 +46,7 @@ namespace OpenBankingApi.Controllers
         [HttpGet]
         public async Task<ActionResult> Token()
         {
-            var scope = new AISScope(true, false, false, false, false, false);
+            var scope = new AISScope(true, true, true, true, true, true);
             var payload = new Dictionary<string, string>()
             {
                 { "sub", "team6@bankmillennium.pl" },

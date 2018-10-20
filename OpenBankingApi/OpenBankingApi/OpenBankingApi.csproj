@@ -259,7 +259,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AIS\AISHttpError.cs" />
     <Compile Include="Models\PolishAPI\IPolishAPI.cs" />
     <Compile Include="Models\PolishAPI\Models\AccountBaseInfo.cs" />
     <Compile Include="Models\PolishAPI\Models\AccountInfo.cs" />
@@ -432,7 +431,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\UserLogged\Index.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
-    <Content Include="Views\AIS\AllUsersAccountsInformation.cshtml" />
+    <Content Include="Views\AIS\GetAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

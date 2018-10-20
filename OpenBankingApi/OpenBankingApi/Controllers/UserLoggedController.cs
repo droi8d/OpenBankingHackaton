@@ -31,17 +31,6 @@ namespace OpenBankingApi.Controllers
             var cert = ReadFile(path);
             _certificate.Import(cert, "millennium", X509KeyStorageFlags.DefaultKeySet);
             string tokenSigned = JWT.Encode(payload, _certificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
-
-            //HttpClientHandler httpClientHandler = new HttpClientHandler();
-            //httpClientHandler.AllowAutoRedirect = false;
-            //var client = new HttpClient(/*httpClientHandler*/);
-
-            //var result = await client.PostAsync("https://bm-devportal-testwebapp03.azurewebsites.net/authorization", new FormUrlEncodedContent(new[]
-            //{
-            //    new KeyValuePair<string, string>("jwt", tokenSigned)
-            //}));
-
-            //var result = await client.GetAsync(string.Format("https://bm-devportal-testwebapp03.azurewebsites.net/tokens?code={0}&refresh_token={1}&redirect_uri={2}&client_id={3}&client_assertion={4}", code, string.Empty, "http://localhost", Guid.NewGuid(), tokenSigned));
             var link = string.Format(
                 "https://bm-devportal-testwebapp03.azurewebsites.net/tokens?code={0}&redirect_uri={1}&client_id={2}&client_assertion={3}",
                 code, "http://localhost:55647/UserLogged", "team6@bankmillennium.pl", tokenSigned);

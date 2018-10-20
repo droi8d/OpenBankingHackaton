@@ -1,0 +1,16 @@
+﻿@model List<Api.Models.AccountBaseInfo>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>GetAccounts</h1>
+</div>
+
+<table border="1px;">
+    <thead><tr><td>Account Type</td><td>Account Number</td></tr></thead>
+    @foreach (var account in Model)
+    {
+        <tr><td>@account.AccountTypeName</td><td>@account.AccountNumber</td></tr>
+    }
+</table>
