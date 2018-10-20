@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Api
+namespace Api.Models.AIS
 {
     using Models;
     using System.Threading;

@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Api.Models
+namespace Api.Models.AIS.Models
 {
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
