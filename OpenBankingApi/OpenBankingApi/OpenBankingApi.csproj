@@ -251,6 +251,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AISController.cs" />
+    <Compile Include="Controllers\AllegoroController.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -328,6 +329,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Allegoro.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -432,6 +434,10 @@
     <Content Include="Views\UserLogged\Index.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
     <Content Include="Views\AIS\GetAccounts.cshtml" />
+    <Content Include="Views\Allegoro\_LayoutAllegoro.cshtml" />
+    <Content Include="Views\Allegoro\Login.cshtml" />
+    <Content Include="Views\Allegoro\Logged.cshtml" />
+    <Content Include="Views\Allegoro\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

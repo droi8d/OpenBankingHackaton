@@ -1,0 +1,12 @@
+﻿@model Api.Models.AccountInfo
+@{
+    Layout = "~/Views/Allegoro/_LayoutAllegoro.cshtml";
+}
+
+<h2>Login Succeeded</h2>
+<h3>Welcome @Model.NameAddress.Name</h3>
+
+<script>
+    $(document).ready(function () {
+        $("#loginLink").hide();
+    })</script>
