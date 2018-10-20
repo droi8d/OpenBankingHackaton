@@ -14,13 +14,20 @@ namespace OpenBankingApi.Models
 
            authorizedSites = new List<AuthorizedSite>() {
                new AuthorizedSite() {
-                   SiteName = "hazard.com",
-                   authorizationDate = new DateTime(2018,10,10)
+                   BankName = "Bank Millennium",
+                   accountId = "0008765576",
+                   authorizationDate = new DateTime(2018,10,19),
            },
+
                new AuthorizedSite() {
-               SiteName = "MojaApteka.pl",
-               authorizationDate = new DateTime(2018,10,10)
-               }
+                   BankName = "PKO",
+                   accountId = "009875642548",
+                   authorizationDate = new DateTime(2018,10,20),
+           },
+               //new AuthorizedSite() {
+               //SiteName = "MojaApteka.pl",
+               //authorizationDate = new DateTime(2018,10,10)
+               //}
            };
         }
     }
