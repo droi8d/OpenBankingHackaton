@@ -13,7 +13,10 @@ namespace OpenBankingApi.Controllers
     using Api.Models;
     using Jose;
     using Newtonsoft.Json;
-    using OpenBankingApi.Models;
+    using OpenBankingApi.Models.AIS;
+    using Api.Models.AIS;
+    using Models;
+    using Api.Models.AIS.Models;
 
     public class AllegoroController : BaseController
     {
@@ -90,6 +93,7 @@ namespace OpenBankingApi.Controllers
             var httpHandler = new WebRequestHandler();
             httpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
             httpHandler.ClientCertificates.Add(this._tlsCertificate);
+
             var api = new PolishAPI(httpHandler, new RequestSigningHandler(this._signCertificate));
             var request = new AccountsRequest(
                 new RequestHeaderAIS(token.accessToken, Guid.NewGuid().ToString(), sendDate: DateTime.Now.ToString(), tppId: "team6@bankmillennium.pl", isDirectPsu: true),
