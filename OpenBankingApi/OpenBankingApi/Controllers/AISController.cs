@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Api.Models.AIS;
+using Api.Models.AIS.Models;
 
 namespace OpenBankingApi.Controllers
 {

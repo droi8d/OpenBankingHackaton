@@ -4,7 +4,9 @@
 // regenerated.
 // </auto-generated>
 
-namespace Api
+using Api.Models.AIS.Models;
+
+namespace Api.Models.AIS
 {
     using Microsoft.Rest;
     using Models;
