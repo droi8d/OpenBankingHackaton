@@ -149,6 +149,9 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.15\lib\net452\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -174,10 +177,12 @@
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.3.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -247,12 +252,60 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AISController.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserLoggedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AIS\AISHttpError.cs" />
+    <Compile Include="Models\PolishAPI\IPolishAPI.cs" />
+    <Compile Include="Models\PolishAPI\Models\AccountBaseInfo.cs" />
+    <Compile Include="Models\PolishAPI\Models\AccountInfo.cs" />
+    <Compile Include="Models\PolishAPI\Models\AccountInfoRequest.cs" />
+    <Compile Include="Models\PolishAPI\Models\AccountResponse.cs" />
+    <Compile Include="Models\PolishAPI\Models\AccountsRequest.cs" />
+    <Compile Include="Models\PolishAPI\Models\AccountsResponse.cs" />
+    <Compile Include="Models\PolishAPI\Models\Bank.cs" />
+    <Compile Include="Models\PolishAPI\Models\BankAccountInfo.cs" />
+    <Compile Include="Models\PolishAPI\Models\CurrencyRate.cs" />
+    <Compile Include="Models\PolishAPI\Models\DeleteConsentHeaders.cs" />
+    <Compile Include="Models\PolishAPI\Models\DeleteConsentRequest.cs" />
+    <Compile Include="Models\PolishAPI\Models\DictionaryItem.cs" />
+    <Compile Include="Models\PolishAPI\Models\Error.cs" />
+    <Compile Include="Models\PolishAPI\Models\GetAccountHeaders.cs" />
+    <Compile Include="Models\PolishAPI\Models\GetAccountsHeaders.cs" />
+    <Compile Include="Models\PolishAPI\Models\GetHoldsHeaders.cs" />
+    <Compile Include="Models\PolishAPI\Models\GetTransactionDetailHeaders.cs" />
+    <Compile Include="Models\PolishAPI\Models\GetTransactionsDoneHeaders.cs" />
+    <Compile Include="Models\PolishAPI\Models\GetTransactionsRejectedHeaders.cs" />
+    <Compile Include="Models\PolishAPI\Models\NameAddress.cs" />
+    <Compile Include="Models\PolishAPI\Models\PageInfo.cs" />
+    <Compile Include="Models\PolishAPI\Models\Payor.cs" />
+    <Compile Include="Models\PolishAPI\Models\RequestHeaderAIS.cs" />
+    <Compile Include="Models\PolishAPI\Models\RequestHeaderWithoutToken.cs" />
+    <Compile Include="Models\PolishAPI\Models\ResponseHeader.cs" />
+    <Compile Include="Models\PolishAPI\Models\SenderIdType.cs" />
+    <Compile Include="Models\PolishAPI\Models\SenderRecipient.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionDetailRequest.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionDetailResponse.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionHoldInfo.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionHoldInfoResponse.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionHoldRequest.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionInfo.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionInfoBase.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionInfoCard.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionInfoRequest.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionInfoRequestBase.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionInfoTax.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionInfoZUS.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionRejectedInfo.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionRejectedInfoResponse.cs" />
+    <Compile Include="Models\PolishAPI\Models\TransactionsDoneInfoResponse.cs" />
+    <Compile Include="Models\PolishAPI\PolishAPI.cs" />
+    <Compile Include="Models\PolishAPI\PolishAPIExtensions.cs" />
+    <Compile Include="Models\RequestSigningHandler.cs" />
     <Compile Include="Models\Scope\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AIS\AISRequestHeader.cs" />
@@ -379,6 +432,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\UserLogged\Index.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
+    <Content Include="Views\AIS\AllUsersAccountsInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

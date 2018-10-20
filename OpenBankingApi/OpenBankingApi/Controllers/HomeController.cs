@@ -54,7 +54,6 @@ namespace OpenBankingApi.Controllers
                 { "redirect_uri", "http://localhost:55647/UserLogged" },
                 //AIS Scope
                 { "scope", scope.GetAISScope(new List<string>(), new List<string>())},
-                
 
                 //PIS scope
                 //{ "scope", "[{\"resource\":{\"type\":\"account\",\"accountType\":{\"paymentAccount\":[],"+"\"creditCardAccount\":[]}},\"scopeTimeDuration\":600,\"throttlingPolicy\":\"psd2Regulatory\",\"privilegeList\":"+
@@ -76,7 +75,7 @@ namespace OpenBankingApi.Controllers
                 new KeyValuePair<string, string>("jwt", tokenSigned)
             }));
 
-            return Redirect(result.RequestMessage.RequestUri.ToString()+"&redirect=true");
+            return Redirect(result.RequestMessage.RequestUri.ToString() + "&redirect=true");
         }
     }
 }

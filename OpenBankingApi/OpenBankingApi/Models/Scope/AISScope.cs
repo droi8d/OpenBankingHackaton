@@ -35,16 +35,28 @@
         [JsonProperty("scopeGroupType")]
         public string ScopeGroupType { get; set; }
 
+        [JsonIgnore]
         public bool UseAccounts { get; set; }
+
+        [JsonIgnore]
         public bool UseTransactionsPending { get; set; }
+
+        [JsonIgnore]
         public bool UseTransactionsRejected { get; set; }
+
+        [JsonIgnore]
         public bool UseHolds { get; set; }
+
+        [JsonIgnore]
         public bool UseTransationDetail { get; set; }
+
+        [JsonIgnore]
         public bool UseTransactionsDone { get; set; }
 
         public string GetAISScope(List<string> paymentAccount, List<string> creditCardAccount)
         {
-            var ais = new AISScope
+            var ais = new[] {
+                new AISScope
             {
                 Resource = new Resource
                 {
@@ -59,6 +71,7 @@
                 ThrottlingPolicy = "psd2Regulatory",
                 PrivilegeList = this.GetPrivilegeList(),
                 ScopeGroupType = "accountInformationService"
+            }
             };
 
             return JsonConvert.SerializeObject(ais);
