@@ -27,10 +27,8 @@ namespace OpenBankingApi.Controllers
                 { "sub", "team6@bankmillennium.pl" }
             };
 
-            var path = @"C:\Certificates\bank.millennium.psd2.sandbox.signing.hackathon.team.06.pfx";
-            var cert = ReadFile(path);
-            _certificate.Import(cert, "millennium", X509KeyStorageFlags.DefaultKeySet);
-            string tokenSigned = JWT.Encode(payload, _certificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
+            this._signCertificate.Import(ReadFile(this.signCertPath), "millennium", X509KeyStorageFlags.DefaultKeySet);
+            string tokenSigned = JWT.Encode(payload, this._signCertificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
             var link = string.Format(
                 "https://bm-devportal-testwebapp03.azurewebsites.net/tokens?code={0}&redirect_uri={1}&client_id={2}&client_assertion={3}",
                 code, "http://localhost:55647/UserLogged", "team6@bankmillennium.pl", tokenSigned);

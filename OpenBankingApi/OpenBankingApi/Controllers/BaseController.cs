@@ -11,7 +11,11 @@ namespace OpenBankingApi.Controllers
 
     public class BaseController : Controller
     {
-        protected readonly X509Certificate2 _certificate = new X509Certificate2();
+        protected readonly X509Certificate2 _signCertificate = new X509Certificate2();
+        protected readonly X509Certificate2 _tlsCertificate = new X509Certificate2();
+
+        protected readonly string signCertPath = @"C:\Certificates\bank.millennium.psd2.sandbox.signing.hackathon.team.06.pfx";
+        protected readonly string tlsCertPath = @"C:\Certificates\bank.millennium.psd2.sandbox.tls.hackathon.team.06.pfx";
 
         protected static byte[] ReadFile(string fileName)
         {

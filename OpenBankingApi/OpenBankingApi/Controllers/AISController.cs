@@ -23,13 +23,13 @@ namespace OpenBankingApi.Controllers
         public async Task<ActionResult> GetAccounts()
         {
             var token = this.Session["userTokenData"] as TokenModel;
-            var path = @"C:\Certificates\bank.millennium.psd2.sandbox.tls.hackathon.team.06.pfx";
-            var cert = ReadFile(path);
-            _certificate.Import(cert, "millennium", X509KeyStorageFlags.DefaultKeySet);
+            this._tlsCertificate.Import(ReadFile(this.tlsCertPath), "millennium", X509KeyStorageFlags.DefaultKeySet);
+
+            this._signCertificate.Import(ReadFile(this.signCertPath), "millennium", X509KeyStorageFlags.DefaultKeySet);
             var httpHandler = new WebRequestHandler();
             httpHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            httpHandler.ClientCertificates.Add(this._certificate);
-            var api = new PolishAPI(httpHandler, new RequestSigningHandler(_certificate));
+            httpHandler.ClientCertificates.Add(this._tlsCertificate);
+            var api = new PolishAPI(httpHandler, new RequestSigningHandler(this._signCertificate));
 
             var request = new AccountsRequest(
                 new RequestHeaderAIS(token.accessToken, Guid.NewGuid().ToString(), sendDate: DateTime.Now.ToString(), tppId: "team6@bankmillennium.pl", isDirectPsu: true),
@@ -39,11 +39,10 @@ namespace OpenBankingApi.Controllers
             api.BaseUri = new Uri("https://bm-devportal-testwebapp02.azurewebsites.net");
             api.AcceptLanguage = "pl-PL";
             api.HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", "Bearer " + token.accessToken);
-            var contentJws = JWT.Encode(JsonConvert.SerializeObject(request), _certificate.GetRSAPrivateKey(),
-                        JwsAlgorithm.RS256);
-            var startIndex = contentJws.IndexOf('.') + 1;
-            var jwsSignature = contentJws.Remove(startIndex, contentJws.IndexOf('.', startIndex) - startIndex);
-            api.XJWSSIGNATURE = jwsSignature;
+
+            api.XJWSSIGNATURE = JWT.Encode(JsonConvert.SerializeObject(request), this._signCertificate.GetRSAPrivateKey(),
+                JwsAlgorithm.RS256);
+            ;
             var result = await api.GetAccountsWithHttpMessagesAsync(request);
 
             var model = result.Body as AccountsResponse;

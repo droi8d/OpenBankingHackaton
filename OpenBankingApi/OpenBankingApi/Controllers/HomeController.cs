@@ -10,10 +10,8 @@ namespace OpenBankingApi.Controllers
 {
     using OpenBankingApi.Models;
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly X509Certificate2 _certificate = new X509Certificate2();
-
         public ActionResult Index()
         {
             return View();
@@ -61,10 +59,8 @@ namespace OpenBankingApi.Controllers
                 { "state", "22137C25EE4A3BB48AF76FA7938EB6C340C668DC6204CE5B27BA7BE8433C6F8C" }
             };
 
-            var path = @"C:\Certificates\bank.millennium.psd2.sandbox.signing.hackathon.team.06.pfx";
-            var cert = ReadFile(path);
-            _certificate.Import(cert, "millennium", X509KeyStorageFlags.DefaultKeySet);
-            string tokenSigned = JWT.Encode(payload, _certificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
+            this._signCertificate.Import(ReadFile(this.signCertPath), "millennium", X509KeyStorageFlags.DefaultKeySet);
+            string tokenSigned = JWT.Encode(payload, this._signCertificate.GetRSAPrivateKey(), JwsAlgorithm.RS256);
 
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             httpClientHandler.AllowAutoRedirect = false;
